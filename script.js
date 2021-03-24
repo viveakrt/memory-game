@@ -57,11 +57,16 @@ function createDivsForColors(colorArray) {
   }
 }
 
+
 // TODO: Implement this function!
+let previous,next;
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
-  const previous = event.target.style.backgroundColor;
+
   event.target.style.backgroundColor = event.target.classList.value;
+  setTimeout(()=>{
+    event.target.style.backgroundColor = "transparent";
+  },1000);
   
   console.log(previous);
   console.log("you clicked",event.target);
