@@ -1,4 +1,6 @@
 const gameContainer = document.getElementById("game");
+const restartBtn = document.getElementById("restart-btn");
+const youWin = document.getElementById("winner");
 
 const GIF = [
   "1",
@@ -53,18 +55,26 @@ function shuffle(array) {
 let shuffledGif = shuffle(GIF);
 
 function createDivForGif(gifArray) {
-  
+  let count = 0;
   for (let gif of gifArray) {
+    count+=1;
     const newDiv = document.createElement("div");
     newDiv.classList.add(gif);
     newDiv.addEventListener("click", handleCardClick);
     gameContainer.append(newDiv);
+    if(count == GIF.length/2){
+      const newDiv = document.createElement("span");
+      newDiv.classList.add("score");
+      gameContainer.append(newDiv);
+    }
   }
 }
 
 // TODO: Implement this function!
+
+
+let score = 0;
 let previous, next;
-let winner = false;
 let count = 0;
 let previousGif = "";
 let nextGif = "";
@@ -111,18 +121,24 @@ function handleCardClick(event) {
     }
   }
 
-  if (gifArray.length == gifCount) {
-    var winner = document.getElementById("winner");
-    winner.textContent = "YOU WON";
-    winner.style.border = "4px solid blue";
-    winner.style.position = "absolute";
-    winner.style.alignSelf = "center";
-    winner.style.margin = "50px";
-    winner.style.height = "100px";
-    winner.style.width = "300px";
-    winner.style.fontSize = "60px";
-    winner.style.color = "green";
-    winner.style.backgroundColor = "white";
+  if (gifArray.length == GIF.length/2) {
+
+    youWin.textContent = "YOU WON";
+    youWin.style.display="block";
+    youWin.style.border = "4px solid blue";
+    youWin.style.alignSelf = "center";
+    youWin.style.height = "100px";
+    youWin.style.width = "300px";
+    youWin.style.fontSize = "60px";
+    youWin.style.color = "green";
+    youWin.style.margin="auto";
+    youWin.style.marginTop="20px";
+    youWin.style.backgroundColor = "white";
+
+    restartBtn.style.display="block";
+    restartBtn.style.margin="auto";
+
+
   }
 }
 
@@ -130,11 +146,30 @@ function handleCardClick(event) {
 createDivForGif(shuffledGif);
 gameContainer.style.display = "none";
 
+
 //Start
 const startBtn = document.getElementById("start-btn");
 const startContainer = document.getElementById("start");
 
+
+
 startBtn.addEventListener("click", function () {
   startContainer.style.display = "none";
   gameContainer.style.display = "block";
+});
+
+restartBtn.addEventListener("click",function(){
+
+  count = 0;
+  previousGif = "";
+  nextGif = "";
+  flag = true;
+  gifArray = [];
+  youWin.style.display="none";
+  restartBtn.style.display="none";
+  let shuffledGif = shuffle(GIF);
+  while (gameContainer.hasChildNodes()) {
+    gameContainer.removeChild(gameContainer.firstChild);
+  }
+  createDivForGif(shuffledGif);
 });

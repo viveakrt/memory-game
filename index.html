@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Memory Game!</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="start" id="start">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Memory Game!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="start" id="start">
     <h1>MATCH</h1>
     <h1>-A-</h1>
     <h1>GIF</h1>
-    <div class="best-score"><h3>BEST SCORE : </h3>
-      <h3 id="bestScore"></h3></div>
-    <input id="start-btn" type="button" value="START!"> 
+
+    <div class="best-score">
+      <h3>BEST SCORE : </h3>
+      <h3 id="bestScore"></h3>
     </div>
+
+    <input id="start-btn" type="button" value="START!">
+  </div>
+
+
+  <div id="game-page">
+    <input id="restart-btn" type="button" value="RESTART">
     <div id="winner">
     </div>
     <div id="game">
+    
     </div>
-    <script src="script.js"></script>
-  </body>
+
+  </div>
+
+
+
+  <script src="script.js"></script>
+</body>
+
 </html>

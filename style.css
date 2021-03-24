@@ -1,10 +1,31 @@
- #game div {
-  border: 1px solid black;
-  width: 100px;
+body{
+  background-color:rgba(129, 235, 226, 0.808);
+}
+ 
+#game div {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 15vw;
   background-image: url(gifs/giphy.webp);
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100px;
+  min-height: 25vh;
   margin: 10px;
   display: inline-block;
 } 
+
+ 
+#game span{
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 15vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 25vh;
+  margin: 10px;
+  display: inline-block;
+} 
+
+#restart-btn{
+  display: none;
+}
