@@ -55,13 +55,16 @@ function shuffle(array) {
 let shuffledGif = shuffle(GIF);
 
 function createDivForGif(gifArray) {
+
   let count = 0;
+
   for (let gif of gifArray) {
     count+=1;
     const newDiv = document.createElement("div");
     newDiv.classList.add(gif);
     newDiv.addEventListener("click", handleCardClick);
     gameContainer.append(newDiv);
+
     if(count == GIF.length/2){
       const newDiv = document.createElement("span");
       newDiv.classList.add("score");
@@ -80,14 +83,17 @@ let previousGif = "";
 let nextGif = "";
 let flag = true;
 let gifArray = [];
+
 const gifCount = GIF.length / 2;
 
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
-
+  
+  score+=1;
   let gif = event.target.classList.value;
-  console.log(gif);
+
   if (!gifArray.includes(gif)) {
+
     if (previousGif.length == 0 && flag) {
       previousGif = gif;
       previous = event;
@@ -109,6 +115,7 @@ function handleCardClick(event) {
         nextGif = gif;
         next = event;
         event.target.style.backgroundImage = `url(gifs/${gif}.gif)`;
+
         setTimeout(() => {
           previous.target.style.backgroundImage = `url(gifs/giphy.webp)`;
           next.target.style.backgroundImage = `url(gifs/giphy.webp)`;
@@ -120,7 +127,8 @@ function handleCardClick(event) {
       count += 1;
     }
   }
-
+  console.log(document.getElementsByClassName("score")[0]);
+  document.getElementsByClassName("score")[0].textContent = score;
   if (gifArray.length == GIF.length/2) {
 
     youWin.textContent = "YOU WON";
@@ -146,7 +154,6 @@ function handleCardClick(event) {
 createDivForGif(shuffledGif);
 gameContainer.style.display = "none";
 
-
 //Start
 const startBtn = document.getElementById("start-btn");
 const startContainer = document.getElementById("start");
@@ -165,11 +172,15 @@ restartBtn.addEventListener("click",function(){
   nextGif = "";
   flag = true;
   gifArray = [];
+
   youWin.style.display="none";
   restartBtn.style.display="none";
+
   let shuffledGif = shuffle(GIF);
+
   while (gameContainer.hasChildNodes()) {
     gameContainer.removeChild(gameContainer.firstChild);
   }
   createDivForGif(shuffledGif);
+
 });
