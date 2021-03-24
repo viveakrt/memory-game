@@ -117,3 +117,15 @@ function handleCardClick(event) {
 
 // when the DOM loads
 createDivForColors(shuffledColors);
+gameContainer.style.display="none";
+
+//Start
+
+const startBtn = document.getElementById("start-btn");
+const startContainer = document.getElementById("start");
+
+startBtn.addEventListener("click", function(){
+  startContainer.style.display = "none";
+  gameContainer.style.display = "block";
+
+});
