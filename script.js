@@ -70,14 +70,13 @@ function handleCardClick(event) {
 	// you can use event.target to see which element was clicked
 
 		let color = event.target.classList.value;
-
 		if (!colorArray.includes(color)) {
 			if (previousColor.length == 0 && flag) {
 				previousColor = color;
 				previous = event;
 				event.target.style.backgroundColor = color;
 				count += 1;
-			} else if (flag) {
+			} else if (previous.target!=event.target && flag) {
 				if (color == previousColor) {
 					colorArray.push(previousColor);
 					event.target.style.backgroundColor = color;
