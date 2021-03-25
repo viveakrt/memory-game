@@ -130,7 +130,7 @@ function handleCardClick(event) {
 	}
 	console.log(document.getElementsByClassName("score")[0]);
 	document.getElementsByClassName("score")[0].innerText = count;
-	if (gifArray.length == GIF.length/2) {
+	if (gifArray.length == 0) {
 
 		localStorage.setItem("score", count);
 		if (count > localStorage.getItem("bestScore")) {
