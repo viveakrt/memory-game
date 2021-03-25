@@ -128,12 +128,12 @@ function handleCardClick(event) {
 			count += 1;
 		}
 	}
-	console.log(document.getElementsByClassName("score")[0]);
+
 	document.getElementsByClassName("score")[0].innerText = count;
+	localStorage.setItem("score", count);
 	if (gifArray.length == GIF.length/2) {
 
-		localStorage.setItem("score", count);
-		if (count > localStorage.getItem("bestScore")) {
+		if (count < localStorage.getItem("bestScore")) {
 			localStorage.setItem("bestScore", count);
 		}
 		youWin.textContent = "YOU WON";
