@@ -55,23 +55,14 @@ let shuffledGif = shuffle(GIF);
 
 function createDivForGif(gifArray) {
 
-	let count = 0;
 
 	for (let gif of gifArray) {
 
-		count += 1;
 		const newDiv = document.createElement("div");
 		newDiv.classList.add(gif);
 		newDiv.addEventListener("click", handleCardClick);
 		gameContainer.append(newDiv);
 
-		if (count == GIF.length / 2) {
-
-			const newDiv = document.createElement("h1");
-			newDiv.innerText = 0;
-			newDiv.classList.add("score");
-			gameContainer.append(newDiv);
-		}
 	}
 }
 
@@ -128,7 +119,7 @@ function handleCardClick(event) {
 		}
 	}
 
-	document.getElementsByClassName("score")[0].innerText = score;
+	document.getElementsByClassName("score")[0].innerText = "Score : "+score;
 	localStorage.setItem("score", score);
 
 	if (gifArray.length == GIF.length/2) {
@@ -162,9 +153,11 @@ createDivForGif(shuffledGif);
 gameContainer.style.display = "none";
 
 
+
 startBtn.addEventListener("click", function () {
 	startContainer.style.display = "none";
 	gameContainer.style.display = "block";
+	document.getElementById("score").style.visibility="visible";
 });
 
 restartBtn.addEventListener("click", function () {

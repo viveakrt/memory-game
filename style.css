@@ -1,5 +1,5 @@
 body {
-  
+
   background-color: #d6effe;
   text-align: center;
   margin: 0px;
@@ -9,8 +9,7 @@ body {
 
   display: flex;
   justify-content: center;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin: 1%;
   flex-wrap: wrap;
 }
 
@@ -19,9 +18,9 @@ body {
   border: 2px solid black;
   border-radius: 10px;
 
-  min-height: 100px;
+  min-height: 200px;
   margin: 10px;
-  width: 100px;
+  width: 200px;
 
   background-image: url(gifs/giphy.png);
   background-repeat: no-repeat;
@@ -30,30 +29,13 @@ body {
   display: inline-block;
 }
 
-#game div:active {
-
-  border: 2px solid black;
-  border-radius: 10px;
-
-  min-height: 100px;
-  margin: 10px;
-  width: 100px;
-
-  transform: rotateY(180deg);
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  display: inline-block;
-}
-
-
 #restart-btn {
 
   display: none;
 }
 
 .score {
-
+  visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,7 +46,7 @@ body {
 
   color: #62357f;
   font-family: 'Fredoka One', cursive;
-  font-size: 60px;
+  font-size: 40px;
   text-align: center;
 }
 
@@ -99,7 +81,7 @@ input {
   font-weight: bolder;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 5vh;
 
   padding: 15px 32px;
   border: none;
