@@ -118,8 +118,8 @@ function handleCardClick(event) {
 				event.target.style.backgroundImage = `url(gifs/${gif}.gif)`;
 
 				setTimeout(() => {
-					previous.target.style.backgroundImage = `url(gifs/giphy.webp)`;
-					next.target.style.backgroundImage = `url(gifs/giphy.webp)`;
+					previous.target.style.backgroundImage = `url(gifs/giphy.png)`;
+					next.target.style.backgroundImage = `url(gifs/giphy.png)`;
 					previousGif = "";
 					nextGif = "";
 					flag = true;
