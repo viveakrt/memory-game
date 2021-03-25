@@ -169,7 +169,7 @@ startBtn.addEventListener("click", function () {
 
 restartBtn.addEventListener("click", function () {
 
-	count = 0;
+	score = 0;
 	previousGif = "";
 	nextGif = "";
 	flag = true;
