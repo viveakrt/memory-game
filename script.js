@@ -110,6 +110,9 @@ function handleCardClick(event) {
 				event.target.style.backgroundImage = `url(gifs/${gif}.png)`;
 
 				setTimeout(() => {
+					previous.target.style.transform = "rotateY(0deg)";
+					event.target.style.transform = "rotateY(0deg)";
+
 					previous.target.style.backgroundImage = `url(gifs/giphy.png)`;
 					next.target.style.backgroundImage = `url(gifs/giphy.png)`;
 
@@ -164,6 +167,16 @@ startBtn.addEventListener("click", function () {
 	startContainer.style.display = "none";
 	gameContainer.style.display = "block";
 	document.getElementById("score").style.visibility = "visible";
+	for (let gif of shuffledGif){
+		document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/${gif}.png)`;
+		document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/${gif}.png)`;
+	}
+	setTimeout(()=>{
+		for (let gif of shuffledGif){
+			document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/giphy.png)`;
+			document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/giphy.png)`;
+		}
+	},5000);
 });
 
 restartBtn.addEventListener("click", function () {
