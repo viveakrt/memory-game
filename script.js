@@ -1,10 +1,12 @@
 const gameContainer = document.getElementById("game");
-const restartBtn = document.getElementById("restart-btn");
 const youWin = document.getElementById("winner");
 const bestScore = document.getElementById("bestScore");
-const startBtn = document.getElementById("start-btn");
 const startContainer = document.getElementById("start");
+
+const restartBtn = document.getElementById("restart-btn");
+const startBtn = document.getElementById("start-btn");
 const replay = document.getElementById("replay");
+const soundBtn = document.getElementById("sound");
 
 const click = new sound("sounds/click.mp3");
 const match = new sound("sounds/match.mp3");
@@ -13,6 +15,12 @@ const notMatch = new sound("sounds/notmatch.mp3");
 const bgSound = new sound("sounds/bgsound.mp3");
 
 bestScore.innerText = localStorage.getItem("bestScore") || 0;
+
+
+
+if (!localStorage.getItem("sound")) {
+	localStorage.setItem("sound", "True");
+}
 
 const GIF = [
 	"1",
@@ -143,7 +151,7 @@ function handleCardClick(event) {
 		if (!localStorage.getItem("bestScore") || score < localStorage.getItem("bestScore")) {
 			localStorage.setItem("bestScore", score);
 		}
-		bgSound.stop();
+
 		youWin.textContent = "YOU WON";
 
 		youWin.style.display = "block";
@@ -170,11 +178,12 @@ gameContainer.style.display = "none";
 
 
 
-
 startBtn.addEventListener("click", function () {
 	startContainer.style.display = "none";
 	gameContainer.style.display = "block";
-	bgSound.play();
+
+soundOnOff();
+
 	document.getElementById("score").style.visibility = "visible";
 	document.getElementById("control").style.visibility = "visible";
 
@@ -219,13 +228,12 @@ function timer() {
 	}, 5000);
 }
 
-function restart(){
+function restart() {
 	score = 0;
 	previousGif = "";
 	nextGif = "";
 	flag = true;
 	gifArray = [];
-	bgSound.play();
 
 	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
 	youWin.style.display = "none";
@@ -255,4 +263,36 @@ function sound(src) {
 	this.stop = function () {
 		this.sound.pause();
 	};
+	this.loopPlay = function() {
+		this.sound.play();
+		this.sound.loop = true;
+	};
 }
+
+function soundOnOff() {
+	if (localStorage.getItem("sound") == "True") {
+		bgSound.loopPlay();
+	} else {
+		bgSound.stop();
+	}
+}
+
+function soundButton(){
+if (localStorage.getItem("sound") == "True") {
+	soundBtn.src = "icons/sound.svg";
+} else {
+	soundBtn.src = "icons/soundCancel.svg";
+}
+}
+soundButton();
+soundBtn.addEventListener("click",function(){
+	
+	if (localStorage.getItem("sound")=="False") {
+		localStorage.setItem("sound", "True");
+		soundButton();
+	}else{
+		localStorage.setItem("sound", "False");
+		soundButton();
+	}
+	soundOnOff();
+});
