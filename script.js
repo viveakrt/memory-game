@@ -132,9 +132,9 @@ function handleCardClick(event) {
 
 	if (gifArray.length == GIF.length / 2) {
 
-		if (score < localStorage.getItem("bestScore")) {
+		if (!localStorage.getItem("bestScore") || score < localStorage.getItem("bestScore") ) {
 			localStorage.setItem("bestScore", score);
-		}
+		} 
 
 		youWin.textContent = "YOU WON";
 
@@ -167,6 +167,17 @@ startBtn.addEventListener("click", function () {
 	startContainer.style.display = "none";
 	gameContainer.style.display = "block";
 	document.getElementById("score").style.visibility = "visible";
+	document.getElementById("timer").style.visibility = "visible";
+	let timePassed = 0;
+	let timer = setInterval(()=>{
+		timePassed = timePassed += 1;
+		timeLeft = 5 - timePassed;
+		document.getElementById("timer").innerText = "Start in : "+timeLeft+"sec";
+		if(timeLeft<0){
+			document.getElementById("timer").innerText = "";
+			clearInterval(timer);
+		}
+	},1000);
 	for (let gif of shuffledGif){
 		document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/${gif}.png)`;
 		document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/${gif}.png)`;
@@ -197,5 +208,26 @@ restartBtn.addEventListener("click", function () {
 		gameContainer.removeChild(gameContainer.firstChild);
 	}
 	createDivForGif(shuffledGif);
+
+	let timePassed = 0;
+	let timer = setInterval(()=>{
+		timePassed = timePassed += 1;
+		timeLeft = 5 - timePassed;
+		document.getElementById("timer").innerText = "Start in : "+timeLeft+"sec";
+		if(timeLeft<0){
+			document.getElementById("timer").innerText = "";
+			clearInterval(timer);
+		}
+	},1000);
+	for (let gif of shuffledGif){
+		document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/${gif}.png)`;
+		document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/${gif}.png)`;
+	}
+	setTimeout(()=>{
+		for (let gif of shuffledGif){
+			document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/giphy.png)`;
+			document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/giphy.png)`;
+		}
+	},5000);
 
 });
