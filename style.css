@@ -31,7 +31,7 @@ body {
 }
 
 #game div:hover{
-  border: 4px dotted #eeebdd;
+  border: 4px dotted #1b1717;
   transition: transform 0.6s;
 }
 

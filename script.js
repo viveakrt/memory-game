@@ -21,6 +21,7 @@ bestScore.innerText = localStorage.getItem("bestScore") || 0;
 if (!localStorage.getItem("sound")) {
 	localStorage.setItem("sound", "True");
 }
+let replayFlag = false; 
 
 const GIF = [
 	"1",
@@ -93,6 +94,10 @@ let gifArray = [];
 const gifCount = GIF.length / 2;
 
 function handleCardClick(event) {
+
+	replay.src = "icons/replay.svg";
+	replayFlag = true;
+
 	click.play();
 	let gif = event.target.classList.value;
 
@@ -179,10 +184,11 @@ gameContainer.style.display = "none";
 
 
 startBtn.addEventListener("click", function () {
+	
 	startContainer.style.display = "none";
 	gameContainer.style.display = "block";
 
-soundOnOff();
+	soundOnOff();
 
 	document.getElementById("score").style.visibility = "visible";
 	document.getElementById("control").style.visibility = "visible";
@@ -194,7 +200,17 @@ restartBtn.addEventListener("click", function () {
 	restart();
 });
 replay.addEventListener("click", function () {
-	restart();
+	if (replayFlag == false) {
+		gameContainer.style.display = "none";
+		startContainer.style.display = "block";
+		document.getElementById("score").style.visibility = "hidden";
+		document.getElementById("control").style.visibility = "hidden";
+	} else {
+		replay.src = "icons/back.svg";
+		replayFlag = false;
+		restart();
+	}
+
 });
 
 
@@ -208,7 +224,6 @@ function timer() {
 		document.getElementById("timer").innerText = "Start in : " + timeLeft + "sec";
 
 		if (timeLeft == 0) {
-
 			document.getElementById("timer").innerText = "";
 			clearInterval(timer);
 		}
@@ -263,7 +278,7 @@ function sound(src) {
 	this.stop = function () {
 		this.sound.pause();
 	};
-	this.loopPlay = function() {
+	this.loopPlay = function () {
 		this.sound.play();
 		this.sound.loop = true;
 	};
@@ -277,22 +292,24 @@ function soundOnOff() {
 	}
 }
 
-function soundButton(){
-if (localStorage.getItem("sound") == "True") {
-	soundBtn.src = "icons/sound.svg";
-} else {
-	soundBtn.src = "icons/soundCancel.svg";
-}
+function soundButton() {
+	if (localStorage.getItem("sound") == "True") {
+		soundBtn.src = "icons/sound.svg";
+	} else {
+		soundBtn.src = "icons/soundCancel.svg";
+	}
 }
 soundButton();
-soundBtn.addEventListener("click",function(){
-	
-	if (localStorage.getItem("sound")=="False") {
+soundBtn.addEventListener("click", function () {
+
+	if (localStorage.getItem("sound") == "False") {
 		localStorage.setItem("sound", "True");
 		soundButton();
-	}else{
+	} else {
 		localStorage.setItem("sound", "False");
 		soundButton();
 	}
 	soundOnOff();
 });
+
+
