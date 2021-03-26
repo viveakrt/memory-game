@@ -1,6 +1,6 @@
-body {
 
-  background-color: #1b1717;
+body {
+  background-color: #141313;
   text-align: center;
   margin: 0px;
 }
@@ -30,14 +30,13 @@ body {
   display: inline-block;
 }
 
-#game div:hover{
+#game div:hover {
   border: 4px dotted #1b1717;
   transition: transform 0.6s;
 }
 
 
 #restart-btn {
-
   display: none;
 }
 
@@ -66,7 +65,7 @@ body {
 
   padding-left: 40px;
   padding-right: 40px;
-
+  margin: 0px;
   color: #eeebdd;
   font-family: 'Fredoka One', cursive;
   font-size: 3em;
@@ -77,23 +76,35 @@ body {
 
   display: flex;
   justify-content: center;
-  font-size: 4vh;
-  color: #810000;
 }
-#bestScore{
+
+#bestScore {
   padding-left: .5em;
 }
 
+
 .start {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url(gifs/giphy.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 
-  font-size: 6vh;
-  margin: 2vh;
-  color: #eeebdd;
+  font-size: 8vh;
+background-color:beige;
+  color: #845ec2;
   font-family: 'Fredoka One', cursive;
-
 }
 
-h1 {
+.game-name {
+  display: flex;
+  margin-top: 2em;
+  flex-direction: column;
+}
+
+.game-name h1 {
+
   margin: 0px;
 }
 
@@ -107,9 +118,10 @@ input {
   text-align: center;
   text-decoration: none;
   font-size: 5vh;
-
+margin-bottom: 1em;
   padding: 15px 32px;
   border: none;
+  
 
   display: inline-block;
   box-shadow: 0 8px 16px 0 rgba(105, 97, 177, 0.2), 0 6px 20px 0 rgba(38, 5, 92, 0.19);
@@ -121,7 +133,7 @@ input:hover {
 }
 
 
-.control{
+.control {
   visibility: hidden;
   display: flex;
   justify-content: space-between;
@@ -129,7 +141,8 @@ input:hover {
   margin: 4em;
 }
 
-.control img{
+.control img {
+  padding: 1em;
   width: 3em;
   align-self: flex-start;
 
