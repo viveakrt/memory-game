@@ -82,9 +82,9 @@ function handleCardClick(event) {
 	let gif = event.target.classList.value;
 
 	if (!gifArray.includes(gif)) {
-		event.target.style.boxShadow = "0 0 5px 10px #eeebdd";
+		
 		if (previousGif.length == 0 && flag) {
-
+			event.target.style.boxShadow = "0 0 5px 10px #eeebdd";
 			previousGif = gif;
 			previous = event;
 			event.target.style.backgroundImage = `url(gifs/${gif}.gif)`;
@@ -101,17 +101,19 @@ function handleCardClick(event) {
 				previous = "";
 				event.target.style.boxShadow = "0 0 5px 10px #59981A";
 			} else {
-
+				previous.target.style.boxShadow = "0 0 5px 10px #F51720";
+				event.target.style.boxShadow = "0 0 5px 10px #F51720";
 				flag = false;
 				nextGif = gif;
 				next = event;
 				event.target.style.backgroundImage = `url(gifs/${gif}.gif)`;
 
 				setTimeout(() => {
+					previous.target.style.backgroundImage = `url(gifs/baw.jpg)`;
+					next.target.style.backgroundImage = `url(gifs/baw.jpg)`;
+
 					previous.target.style.boxShadow = "none";
 					next.target.style.boxShadow = "none";
-					previous.target.style.backgroundImage = `url(gifs/giphy.png)`;
-					next.target.style.backgroundImage = `url(gifs/giphy.png)`;
 					previousGif = "";
 					nextGif = "";
 					flag = true;

@@ -22,11 +22,15 @@ body {
   margin: 10px;
   width: 200px;
 
-  background-image: url(gifs/giphy.png);
+  background-image: url(gifs/baw.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 
   display: inline-block;
+}
+
+#game div:hover{
+  border: 4px dotted #eeebdd;
 }
 
 
