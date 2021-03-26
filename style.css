@@ -1,6 +1,6 @@
 body {
 
-  background-color: #d6effe;
+  background-color: #1b1717;
   text-align: center;
   margin: 0px;
 }
@@ -15,7 +15,7 @@ body {
 
 #game div {
 
-  border: 2px solid black;
+  border: 4px solid #eeebdd;
   border-radius: 10px;
 
   min-height: 200px;
@@ -28,6 +28,7 @@ body {
 
   display: inline-block;
 }
+
 
 #restart-btn {
 
@@ -44,7 +45,7 @@ body {
   padding-left: 40px;
   padding-right: 40px;
 
-  color: #62357f;
+  color: #eeebdd;
   font-family: 'Fredoka One', cursive;
   font-size: 40px;
   text-align: center;
@@ -55,15 +56,15 @@ body {
   display: flex;
   justify-content: center;
   font-size: 4vh;
-  margin: 0px;
-  color: #a75dd3;
+  padding-left: 10px;
+  color: #810000;
 }
 
 .start {
 
   font-size: 9vh;
   margin: 0px;
-  color: #62357f;
+  color: #eeebdd;
   font-family: 'Fredoka One', cursive;
 
 }
@@ -74,7 +75,7 @@ h1 {
 
 input {
 
-  background-color: #3889f9;
+  background-color: #630000;
 
   font-family: 'Fredoka One', cursive;
   color: white;

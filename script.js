@@ -5,7 +5,7 @@ const bestScore = document.getElementById("bestScore");
 const startBtn = document.getElementById("start-btn");
 const startContainer = document.getElementById("start");
 
-bestScore.innerText = localStorage.getItem("bestScore");
+bestScore.innerText = localStorage.getItem("bestScore") || 0;
 
 const GIF = [
 	"1",
@@ -82,7 +82,7 @@ function handleCardClick(event) {
 	let gif = event.target.classList.value;
 
 	if (!gifArray.includes(gif)) {
-
+		event.target.style.boxShadow = "0 0 5px 10px #eeebdd";
 		if (previousGif.length == 0 && flag) {
 
 			previousGif = gif;
@@ -97,8 +97,9 @@ function handleCardClick(event) {
 				gifArray.push(previousGif);
 				event.target.style.backgroundImage = `url(gifs/${gif}.gif)`;
 				previousGif = "";
+				previous.target.style.boxShadow = "0 0 5px 10px #59981A";
 				previous = "";
-
+				event.target.style.boxShadow = "0 0 5px 10px #59981A";
 			} else {
 
 				flag = false;
@@ -107,7 +108,8 @@ function handleCardClick(event) {
 				event.target.style.backgroundImage = `url(gifs/${gif}.gif)`;
 
 				setTimeout(() => {
-
+					previous.target.style.boxShadow = "none";
+					next.target.style.boxShadow = "none";
 					previous.target.style.backgroundImage = `url(gifs/giphy.png)`;
 					next.target.style.backgroundImage = `url(gifs/giphy.png)`;
 					previousGif = "";
@@ -119,10 +121,10 @@ function handleCardClick(event) {
 		}
 	}
 
-	document.getElementsByClassName("score")[0].innerText = "Score : "+score;
+	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
 	localStorage.setItem("score", score);
 
-	if (gifArray.length == GIF.length/2) {
+	if (gifArray.length == GIF.length / 2) {
 
 		if (score < localStorage.getItem("bestScore")) {
 			localStorage.setItem("bestScore", score);
@@ -154,10 +156,11 @@ gameContainer.style.display = "none";
 
 
 
+
 startBtn.addEventListener("click", function () {
 	startContainer.style.display = "none";
 	gameContainer.style.display = "block";
-	document.getElementById("score").style.visibility="visible";
+	document.getElementById("score").style.visibility = "visible";
 });
 
 restartBtn.addEventListener("click", function () {
@@ -168,6 +171,7 @@ restartBtn.addEventListener("click", function () {
 	flag = true;
 	gifArray = [];
 
+	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
 	youWin.style.display = "none";
 	restartBtn.style.display = "none";
 
