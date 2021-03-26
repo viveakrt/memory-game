@@ -84,18 +84,19 @@ function handleCardClick(event) {
 	if (!gifArray.includes(gif)) {
 		
 		if (previousGif.length == 0 && flag) {
+			event.target.style.transform = "rotateY(360deg)";
 			event.target.style.boxShadow = "0 0 5px 10px #eeebdd";
 			previousGif = gif;
 			previous = event;
-			event.target.style.backgroundImage = `url(gifs/${gif}.gif)`;
+			event.target.style.backgroundImage = `url(gifs/${gif}.png)`;
 			score += 1;
 
 		} else if (previous.target != event.target && flag) {
-
+			event.target.style.transform = "rotateY(360deg)";
 			if (gif == previousGif) {
 
 				gifArray.push(previousGif);
-				event.target.style.backgroundImage = `url(gifs/${gif}.gif)`;
+				event.target.style.backgroundImage = `url(gifs/${gif}.png)`;
 				previousGif = "";
 				previous.target.style.boxShadow = "0 0 5px 10px #59981A";
 				previous = "";
@@ -106,11 +107,11 @@ function handleCardClick(event) {
 				flag = false;
 				nextGif = gif;
 				next = event;
-				event.target.style.backgroundImage = `url(gifs/${gif}.gif)`;
+				event.target.style.backgroundImage = `url(gifs/${gif}.png)`;
 
 				setTimeout(() => {
-					previous.target.style.backgroundImage = `url(gifs/baw.jpg)`;
-					next.target.style.backgroundImage = `url(gifs/baw.jpg)`;
+					previous.target.style.backgroundImage = `url(gifs/giphy.png)`;
+					next.target.style.backgroundImage = `url(gifs/giphy.png)`;
 
 					previous.target.style.boxShadow = "none";
 					next.target.style.boxShadow = "none";
