@@ -60,7 +60,7 @@ function createDivForGif(gifArray) {
 
 		const newDiv = document.createElement("div");
 		newDiv.classList.add(gif);
-		newDiv.addEventListener("click", handleCardClick);
+
 		gameContainer.append(newDiv);
 
 	}
@@ -108,7 +108,7 @@ function handleCardClick(event) {
 				nextGif = gif;
 				next = event;
 				event.target.style.backgroundImage = `url(gifs/${gif}.png)`;
-
+				window.navigator.vibrate(200);
 				setTimeout(() => {
 					previous.target.style.transform = "rotateY(0deg)";
 					event.target.style.transform = "rotateY(0deg)";
@@ -166,28 +166,11 @@ gameContainer.style.display = "none";
 startBtn.addEventListener("click", function () {
 	startContainer.style.display = "none";
 	gameContainer.style.display = "block";
+
 	document.getElementById("score").style.visibility = "visible";
 	document.getElementById("timer").style.visibility = "visible";
-	let timePassed = 0;
-	let timer = setInterval(()=>{
-		timePassed = timePassed += 1;
-		timeLeft = 5 - timePassed;
-		document.getElementById("timer").innerText = "Start in : "+timeLeft+"sec";
-		if(timeLeft<0){
-			document.getElementById("timer").innerText = "";
-			clearInterval(timer);
-		}
-	},1000);
-	for (let gif of shuffledGif){
-		document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/${gif}.png)`;
-		document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/${gif}.png)`;
-	}
-	setTimeout(()=>{
-		for (let gif of shuffledGif){
-			document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/giphy.png)`;
-			document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/giphy.png)`;
-		}
-	},5000);
+
+	timer();
 });
 
 restartBtn.addEventListener("click", function () {
@@ -205,29 +188,40 @@ restartBtn.addEventListener("click", function () {
 	let shuffledGif = shuffle(GIF);
 
 	while (gameContainer.hasChildNodes()) {
+
 		gameContainer.removeChild(gameContainer.firstChild);
 	}
 	createDivForGif(shuffledGif);
+	timer();
+});
 
+
+function timer(){
 	let timePassed = 0;
+
 	let timer = setInterval(()=>{
+		document.getElementsByTagName("div").
 		timePassed = timePassed += 1;
 		timeLeft = 5 - timePassed;
 		document.getElementById("timer").innerText = "Start in : "+timeLeft+"sec";
+
 		if(timeLeft<0){
+
 			document.getElementById("timer").innerText = "";
 			clearInterval(timer);
 		}
 	},1000);
 	for (let gif of shuffledGif){
+
 		document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/${gif}.png)`;
 		document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/${gif}.png)`;
 	}
 	setTimeout(()=>{
 		for (let gif of shuffledGif){
+			document.getElementsByClassName(gif)[0].addEventListener("click", handleCardClick);
+			document.getElementsByClassName(gif)[1].addEventListener("click", handleCardClick);
 			document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/giphy.png)`;
 			document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/giphy.png)`;
 		}
 	},5000);
-
-});
+}
