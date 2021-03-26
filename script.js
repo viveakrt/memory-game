@@ -4,6 +4,13 @@ const youWin = document.getElementById("winner");
 const bestScore = document.getElementById("bestScore");
 const startBtn = document.getElementById("start-btn");
 const startContainer = document.getElementById("start");
+const replay = document.getElementById("replay");
+
+const click = new sound("sounds/click.mp3");
+const match = new sound("sounds/match.mp3");
+const win = new sound("sounds/tada.mp3");
+const notMatch = new sound("sounds/notmatch.mp3");
+const bgSound = new sound("sounds/bgsound.mp3");
 
 bestScore.innerText = localStorage.getItem("bestScore") || 0;
 
@@ -78,11 +85,11 @@ let gifArray = [];
 const gifCount = GIF.length / 2;
 
 function handleCardClick(event) {
-
+	click.play();
 	let gif = event.target.classList.value;
 
 	if (!gifArray.includes(gif)) {
-		
+
 		if (previousGif.length == 0 && flag) {
 			event.target.style.transform = "rotateY(360deg)";
 			event.target.style.boxShadow = "0 0 5px 10px #eeebdd";
@@ -94,7 +101,7 @@ function handleCardClick(event) {
 		} else if (previous.target != event.target && flag) {
 			event.target.style.transform = "rotateY(360deg)";
 			if (gif == previousGif) {
-
+				match.play();
 				gifArray.push(previousGif);
 				event.target.style.backgroundImage = `url(gifs/${gif}.png)`;
 				previousGif = "";
@@ -109,6 +116,7 @@ function handleCardClick(event) {
 				next = event;
 				event.target.style.backgroundImage = `url(gifs/${gif}.png)`;
 				window.navigator.vibrate(200);
+				notMatch.play();
 				setTimeout(() => {
 					previous.target.style.transform = "rotateY(0deg)";
 					event.target.style.transform = "rotateY(0deg)";
@@ -131,11 +139,11 @@ function handleCardClick(event) {
 	localStorage.setItem("score", score);
 
 	if (gifArray.length == GIF.length / 2) {
-
-		if (!localStorage.getItem("bestScore") || score < localStorage.getItem("bestScore") ) {
+		win.play();
+		if (!localStorage.getItem("bestScore") || score < localStorage.getItem("bestScore")) {
 			localStorage.setItem("bestScore", score);
-		} 
-
+		}
+		bgSound.stop();
 		youWin.textContent = "YOU WON";
 
 		youWin.style.display = "block";
@@ -166,20 +174,58 @@ gameContainer.style.display = "none";
 startBtn.addEventListener("click", function () {
 	startContainer.style.display = "none";
 	gameContainer.style.display = "block";
-
+	bgSound.play();
 	document.getElementById("score").style.visibility = "visible";
-	document.getElementById("timer").style.visibility = "visible";
+	document.getElementById("control").style.visibility = "visible";
 
 	timer();
 });
 
 restartBtn.addEventListener("click", function () {
+	restart();
+});
+replay.addEventListener("click", function () {
+	restart();
+});
 
+
+function timer() {
+	let timePassed = 0;
+
+	let timer = setInterval(() => {
+		document.getElementsByTagName("div").
+		timePassed = timePassed += 1;
+		timeLeft = 5 - timePassed;
+		document.getElementById("timer").innerText = "Start in : " + timeLeft + "sec";
+
+		if (timeLeft == 0) {
+
+			document.getElementById("timer").innerText = "";
+			clearInterval(timer);
+		}
+	}, 1000);
+	for (let gif of shuffledGif) {
+
+		document.getElementsByClassName(gif)[0].style.backgroundImage = `url(gifs/${gif}.png)`;
+		document.getElementsByClassName(gif)[1].style.backgroundImage = `url(gifs/${gif}.png)`;
+	}
+	setTimeout(() => {
+		for (let gif of shuffledGif) {
+			document.getElementsByClassName(gif)[0].addEventListener("click", handleCardClick);
+			document.getElementsByClassName(gif)[1].addEventListener("click", handleCardClick);
+			document.getElementsByClassName(gif)[0].style.backgroundImage = `url(gifs/giphy.png)`;
+			document.getElementsByClassName(gif)[1].style.backgroundImage = `url(gifs/giphy.png)`;
+		}
+	}, 5000);
+}
+
+function restart(){
 	score = 0;
 	previousGif = "";
 	nextGif = "";
 	flag = true;
 	gifArray = [];
+	bgSound.play();
 
 	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
 	youWin.style.display = "none";
@@ -193,35 +239,20 @@ restartBtn.addEventListener("click", function () {
 	}
 	createDivForGif(shuffledGif);
 	timer();
-});
+}
 
-
-function timer(){
-	let timePassed = 0;
-
-	let timer = setInterval(()=>{
-		document.getElementsByTagName("div").
-		timePassed = timePassed += 1;
-		timeLeft = 5 - timePassed;
-		document.getElementById("timer").innerText = "Start in : "+timeLeft+"sec";
-
-		if(timeLeft<0){
-
-			document.getElementById("timer").innerText = "";
-			clearInterval(timer);
-		}
-	},1000);
-	for (let gif of shuffledGif){
-
-		document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/${gif}.png)`;
-		document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/${gif}.png)`;
-	}
-	setTimeout(()=>{
-		for (let gif of shuffledGif){
-			document.getElementsByClassName(gif)[0].addEventListener("click", handleCardClick);
-			document.getElementsByClassName(gif)[1].addEventListener("click", handleCardClick);
-			document.getElementsByClassName(gif)[0].style.backgroundImage=  `url(gifs/giphy.png)`;
-			document.getElementsByClassName(gif)[1].style.backgroundImage=  `url(gifs/giphy.png)`;
-		}
-	},5000);
+//sound
+function sound(src) {
+	this.sound = document.createElement("audio");
+	this.sound.src = src;
+	this.sound.setAttribute("preload", "auto");
+	this.sound.setAttribute("controls", "none");
+	this.sound.style.display = "none";
+	document.body.appendChild(this.sound);
+	this.play = function () {
+		this.sound.play();
+	};
+	this.stop = function () {
+		this.sound.pause();
+	};
 }
