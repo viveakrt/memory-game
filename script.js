@@ -21,7 +21,7 @@ bestScore.innerText = localStorage.getItem("bestScore") || 0;
 if (!localStorage.getItem("sound")) {
 	localStorage.setItem("sound", "True");
 }
-let replayFlag = false; 
+let replayFlag = false;
 
 const GIF = [
 	"1",
@@ -90,6 +90,7 @@ let previousGif = "";
 let nextGif = "";
 let flag = true;
 let gifArray = [];
+let timeCount = false;
 
 const gifCount = GIF.length / 2;
 
@@ -184,7 +185,7 @@ gameContainer.style.display = "none";
 
 
 startBtn.addEventListener("click", function () {
-	
+
 	startContainer.style.display = "none";
 	gameContainer.style.display = "block";
 
@@ -192,13 +193,16 @@ startBtn.addEventListener("click", function () {
 
 	document.getElementById("score").style.visibility = "visible";
 	document.getElementById("control").style.visibility = "visible";
+	if (timeCount == false) {
+		timer();
+	}
 
-	timer();
 });
 
 restartBtn.addEventListener("click", function () {
 	restart();
 });
+
 replay.addEventListener("click", function () {
 	if (replayFlag == false) {
 		gameContainer.style.display = "none";
@@ -216,18 +220,21 @@ replay.addEventListener("click", function () {
 
 function timer() {
 	let timePassed = 0;
-
+	timeCount = true;
+	document.getElementById("timer").innerText = "Start in : 5sec";
 	let timer = setInterval(() => {
-		document.getElementsByTagName("div").
-		timePassed = timePassed += 1;
+
+		timePassed += 1;
 		timeLeft = 5 - timePassed;
 		document.getElementById("timer").innerText = "Start in : " + timeLeft + "sec";
 
 		if (timeLeft == 0) {
 			document.getElementById("timer").innerText = "";
 			clearInterval(timer);
+			timeCount = false;
+
 		}
-	}, 1000);
+	}, 1000, 5);
 	for (let gif of shuffledGif) {
 
 		document.getElementsByClassName(gif)[0].style.backgroundImage = `url(gifs/${gif}.png)`;
@@ -239,6 +246,7 @@ function timer() {
 			document.getElementsByClassName(gif)[1].addEventListener("click", handleCardClick);
 			document.getElementsByClassName(gif)[0].style.backgroundImage = `url(gifs/giphy.png)`;
 			document.getElementsByClassName(gif)[1].style.backgroundImage = `url(gifs/giphy.png)`;
+
 		}
 	}, 5000);
 }
@@ -261,7 +269,9 @@ function restart() {
 		gameContainer.removeChild(gameContainer.firstChild);
 	}
 	createDivForGif(shuffledGif);
-	timer();
+	if (timeCount == false) {
+		timer();
+	}
 }
 
 //sound
@@ -299,6 +309,7 @@ function soundButton() {
 		soundBtn.src = "icons/soundCancel.svg";
 	}
 }
+
 soundButton();
 soundBtn.addEventListener("click", function () {
 
@@ -311,5 +322,3 @@ soundBtn.addEventListener("click", function () {
 	}
 	soundOnOff();
 });
-
-
