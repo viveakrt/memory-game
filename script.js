@@ -239,6 +239,8 @@ function timer() {
 
 		document.getElementsByClassName(gif)[0].style.backgroundImage = `url(gifs/${gif}.png)`;
 		document.getElementsByClassName(gif)[1].style.backgroundImage = `url(gifs/${gif}.png)`;
+		document.getElementsByClassName(gif)[0].removeEventListener("click", handleCardClick);
+		document.getElementsByClassName(gif)[1].removeEventListener("click", handleCardClick);
 	}
 	setTimeout(() => {
 		for (let gif of shuffledGif) {
