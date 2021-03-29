@@ -1,6 +1,7 @@
-html{
+html {
   margin: 0px;
 }
+
 body {
   background-color: #141313;
   text-align: center;
@@ -42,7 +43,27 @@ body {
   display: none;
 }
 
+#submit-btn {
+  display: none;
+}
+
 .score {
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: inline;
+
+  padding-left: 40px;
+  padding-right: 40px;
+
+  color: #eeebdd;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 50px;
+  text-align: center;
+}
+
+.user {
   visibility: hidden;
   display: flex;
   align-items: center;
@@ -79,8 +100,12 @@ body {
   display: flex;
   justify-content: center;
   font-size: 4vh;
-  color:darkred;
+  color: darkred;
   font-family: 'Courier New', Courier, monospace;
+}
+
+.best-score h3 {
+  margin: 0;
 }
 
 #bestScore {
@@ -95,7 +120,7 @@ body {
 
 
   font-size: 6vh;
-background-color:#eeebdd;
+  background-color: #eeebdd;
   color: #845ec2;
   font-family: 'Fredoka One', cursive;
 }
@@ -121,7 +146,7 @@ input {
   text-align: center;
   text-decoration: none;
   font-size: 5vh;
-margin-bottom: 1em;
+  margin-bottom: 1em;
   padding: 15px 32px;
   border: none;
 
@@ -148,4 +173,17 @@ input:hover {
   width: 3em;
   align-self: flex-start;
 
+}
+
+
+#best-score-parent {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+
+#result {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }

@@ -1,10 +1,12 @@
 const gameContainer = document.getElementById("game");
 const youWin = document.getElementById("winner");
+const userEmail = document.getElementById("email");
 const bestScore = document.getElementById("bestScore");
 const startContainer = document.getElementById("start");
 
 const restartBtn = document.getElementById("restart-btn");
 const startBtn = document.getElementById("start-btn");
+const submitBtn = document.getElementById("submit-btn");
 const replay = document.getElementById("replay");
 const soundBtn = document.getElementById("sound");
 
@@ -13,6 +15,8 @@ const match = new sound("sounds/match.mp3");
 const win = new sound("sounds/tada.mp3");
 const notMatch = new sound("sounds/notmatch.mp3");
 const bgSound = new sound("sounds/bgsound.mp3");
+
+
 
 bestScore.innerText = localStorage.getItem("bestScore") || 0;
 
@@ -52,33 +56,33 @@ const GIF = [
 
 function shuffle(array) {
 	let counter = array.length;
-
+	
 	while (counter > 0) {
-
+		
 		let index = Math.floor(Math.random() * counter);
-
+		
 		counter--;
-
+		
 		let temp = array[counter];
 		array[counter] = array[index];
 		array[index] = temp;
 	}
-
+	
 	return array;
 }
 
 let shuffledGif = shuffle(GIF);
 
 function createDivForGif(gifArray) {
-
-
+	
+	
 	for (let gif of gifArray) {
-
+		
 		const newDiv = document.createElement("div");
 		newDiv.classList.add(gif);
-
+		
 		gameContainer.append(newDiv);
-
+		
 	}
 }
 
@@ -95,15 +99,15 @@ let timeCount = false;
 const gifCount = GIF.length / 2;
 
 function handleCardClick(event) {
-
+	
 	replay.src = "icons/replay.svg";
 	replayFlag = true;
-
+	
 	click.play();
 	let gif = event.target.classList.value;
-
+	
 	if (!gifArray.includes(gif)) {
-
+		
 		if (previousGif.length == 0 && flag) {
 			event.target.style.transform = "rotateY(360deg)";
 			event.target.style.boxShadow = "0 0 5px 10px #eeebdd";
@@ -111,7 +115,7 @@ function handleCardClick(event) {
 			previous = event;
 			event.target.style.backgroundImage = `url(gifs/${gif}.png)`;
 			score += 1;
-
+			
 		} else if (previous.target != event.target && flag) {
 			event.target.style.transform = "rotateY(360deg)";
 			if (gif == previousGif) {
@@ -134,10 +138,10 @@ function handleCardClick(event) {
 				setTimeout(() => {
 					previous.target.style.transform = "rotateY(0deg)";
 					event.target.style.transform = "rotateY(0deg)";
-
+					
 					previous.target.style.backgroundImage = `url(gifs/giphy.png)`;
 					next.target.style.backgroundImage = `url(gifs/giphy.png)`;
-
+					
 					previous.target.style.boxShadow = "none";
 					next.target.style.boxShadow = "none";
 					previousGif = "";
@@ -148,55 +152,69 @@ function handleCardClick(event) {
 			score += 1;
 		}
 	}
-
+	
 	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
 	localStorage.setItem("score", score);
-
-	if (gifArray.length == GIF.length / 2) {
+	
+	if (gifArray.length == GIF.length / 2 ) {
+		gameContainer.style.display = "none";
 		win.play();
 		if (!localStorage.getItem("bestScore") || score < localStorage.getItem("bestScore")) {
 			localStorage.setItem("bestScore", score);
 		}
 
+		userEmail.style.display = "block";
+		userEmail.style.visibility = "visible";
+		userEmail.style.margin = "auto";
+		userEmail.style.marginBottom = "1em";
+		
 		youWin.textContent = "YOU WON";
 
 		youWin.style.display = "block";
-		youWin.style.border = "4px solid blue";
+		youWin.style.border = "1px solid #00AC61";
 		youWin.style.alignSelf = "center";
 		youWin.style.height = "100px";
 		youWin.style.width = "300px";
+		youWin.style.borderRadius = "30px";
 		youWin.style.fontSize = "60px";
-		youWin.style.color = "green";
+		youWin.style.color = "#eeebdd";
 		youWin.style.margin = "auto";
+		youWin.style.marginBottom = "1em";
 		youWin.style.marginTop = "20px";
-		youWin.style.backgroundColor = "white";
-
+		youWin.style.backgroundColor = "#538FFB";
+		
 		restartBtn.style.display = "block";
-		restartBtn.style.margin = "auto";
+		restartBtn.style.margin= "auto";
+		
+		submitBtn.style.display = "block";
+		submitBtn.style.margin = "auto";
 
-
+		
+		
 	}
 }
 
 
 createDivForGif(shuffledGif);
 gameContainer.style.display = "none";
-
+userEmail.style.display = "none";
 
 
 startBtn.addEventListener("click", function () {
-
+	
+	
 	startContainer.style.display = "none";
 	gameContainer.style.display = "block";
-
+	
 	soundOnOff();
+	
 
 	document.getElementById("score").style.visibility = "visible";
 	document.getElementById("control").style.visibility = "visible";
 	if (timeCount == false) {
 		timer();
 	}
-
+	
 });
 
 restartBtn.addEventListener("click", function () {
@@ -207,6 +225,8 @@ replay.addEventListener("click", function () {
 	if (replayFlag == false) {
 		gameContainer.style.display = "none";
 		startContainer.style.display = "block";
+
+		userEmail.style.visibility = "hidden";
 		document.getElementById("score").style.visibility = "hidden";
 		document.getElementById("control").style.visibility = "hidden";
 	} else {
@@ -214,7 +234,7 @@ replay.addEventListener("click", function () {
 		replayFlag = false;
 		restart();
 	}
-
+	
 });
 
 
@@ -223,20 +243,20 @@ function timer() {
 	timeCount = true;
 	document.getElementById("timer").innerText = "Start in : 5sec";
 	let timer = setInterval(() => {
-
+		
 		timePassed += 1;
 		timeLeft = 5 - timePassed;
 		document.getElementById("timer").innerText = "Start in : " + timeLeft + "sec";
-
+		
 		if (timeLeft == 0) {
 			document.getElementById("timer").innerText = "";
 			clearInterval(timer);
 			timeCount = false;
-
+			
 		}
 	}, 1000, 5);
 	for (let gif of shuffledGif) {
-
+		
 		document.getElementsByClassName(gif)[0].style.backgroundImage = `url(gifs/${gif}.png)`;
 		document.getElementsByClassName(gif)[1].style.backgroundImage = `url(gifs/${gif}.png)`;
 		document.getElementsByClassName(gif)[0].removeEventListener("click", handleCardClick);
@@ -248,7 +268,7 @@ function timer() {
 			document.getElementsByClassName(gif)[1].addEventListener("click", handleCardClick);
 			document.getElementsByClassName(gif)[0].style.backgroundImage = `url(gifs/giphy.png)`;
 			document.getElementsByClassName(gif)[1].style.backgroundImage = `url(gifs/giphy.png)`;
-
+			
 		}
 	}, 5000);
 }
@@ -259,15 +279,16 @@ function restart() {
 	nextGif = "";
 	flag = true;
 	gifArray = [];
-
+	gameContainer.style.display = "block";
 	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
 	youWin.style.display = "none";
+	userEmail.style.display = "none";
 	restartBtn.style.display = "none";
-
+	
 	let shuffledGif = shuffle(GIF);
 
 	while (gameContainer.hasChildNodes()) {
-
+		
 		gameContainer.removeChild(gameContainer.firstChild);
 	}
 	createDivForGif(shuffledGif);
@@ -314,7 +335,7 @@ function soundButton() {
 
 soundButton();
 soundBtn.addEventListener("click", function () {
-
+	
 	if (localStorage.getItem("sound") == "False") {
 		localStorage.setItem("sound", "True");
 		soundButton();
@@ -324,3 +345,4 @@ soundBtn.addEventListener("click", function () {
 	}
 	soundOnOff();
 });
+
