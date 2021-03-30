@@ -163,7 +163,7 @@ function handleCardClick(event) {
 
 	localStorage.setItem("score", score);
 	
-	if (gifArray.length== 0 ) {
+	if (gifArray.length== GIF.length/2 ) {
 		gameContainer.style.display = "none";
 		document.getElementById("scoreinput").value = Number(score);
 		win.play();
