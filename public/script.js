@@ -1,14 +1,20 @@
 const gameContainer = document.getElementById("game");
 const youWin = document.getElementById("winner");
 const userEmail = document.getElementById("email");
+const userName = document.getElementById("username");
 const bestScore = document.getElementById("bestScore");
 const startContainer = document.getElementById("start");
+const scoreFinal = document.getElementById("score");
 
 const restartBtn = document.getElementById("restart-btn");
 const startBtn = document.getElementById("start-btn");
 const submitBtn = document.getElementById("submit-btn");
 const replay = document.getElementById("replay");
 const soundBtn = document.getElementById("sound");
+
+const notEmptyUser = document.getElementById("not-empty-user");
+
+
 
 const click = new sound("sounds/click.mp3");
 const match = new sound("sounds/match.mp3");
@@ -154,24 +160,33 @@ function handleCardClick(event) {
 	}
 	
 	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
+
 	localStorage.setItem("score", score);
 	
-	if (gifArray.length == GIF.length / 2 ) {
+	if (gifArray.length == 1){//GIF.length / 2 ) {
 		gameContainer.style.display = "none";
+		document.getElementById("scoreinput").value = Number(score);
 		win.play();
 		if (!localStorage.getItem("bestScore") || score < localStorage.getItem("bestScore")) {
 			localStorage.setItem("bestScore", score);
 		}
 
+		userName.style.display = "block";
+		userName.style.visibility = "visible";
+		userName.style.margin = "auto";
+		userName.style.marginBottom = "1em";
+
 		userEmail.style.display = "block";
 		userEmail.style.visibility = "visible";
 		userEmail.style.margin = "auto";
 		userEmail.style.marginBottom = "1em";
+
+		
 		
 		youWin.textContent = "YOU WON";
 
 		youWin.style.display = "block";
-		youWin.style.border = "1px solid #00AC61";
+		youWin.style.border = "1px solid #cc561e";
 		youWin.style.alignSelf = "center";
 		youWin.style.height = "100px";
 		youWin.style.width = "300px";
@@ -181,7 +196,7 @@ function handleCardClick(event) {
 		youWin.style.margin = "auto";
 		youWin.style.marginBottom = "1em";
 		youWin.style.marginTop = "20px";
-		youWin.style.backgroundColor = "#538FFB";
+		youWin.style.backgroundColor = "#aa2b1d";
 		
 		restartBtn.style.display = "block";
 		restartBtn.style.margin= "auto";
@@ -198,22 +213,26 @@ function handleCardClick(event) {
 createDivForGif(shuffledGif);
 gameContainer.style.display = "none";
 userEmail.style.display = "none";
+userName.style.display = "none";
 
 
 startBtn.addEventListener("click", function () {
+
+
+		startContainer.style.display = "none";
+		gameContainer.style.display = "block";
+		
+		soundOnOff();
+		
 	
-	
-	startContainer.style.display = "none";
-	gameContainer.style.display = "block";
-	
-	soundOnOff();
+		scoreFinal.style.visibility = "visible";
+		document.getElementById("control").style.visibility = "visible";
+		if (timeCount == false) {
+			timer();
+		}
 	
 
-	document.getElementById("score").style.visibility = "visible";
-	document.getElementById("control").style.visibility = "visible";
-	if (timeCount == false) {
-		timer();
-	}
+
 	
 });
 
@@ -227,7 +246,8 @@ replay.addEventListener("click", function () {
 		startContainer.style.display = "block";
 
 		userEmail.style.visibility = "hidden";
-		document.getElementById("score").style.visibility = "hidden";
+		userUser.style.visibility = "hidden";
+		scoreFinal.style.visibility = "hidden";
 		document.getElementById("control").style.visibility = "hidden";
 	} else {
 		replay.src = "icons/back.svg";
@@ -283,6 +303,7 @@ function restart() {
 	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
 	youWin.style.display = "none";
 	userEmail.style.display = "none";
+	userUser.style.display = "none";
 	restartBtn.style.display = "none";
 	
 	let shuffledGif = shuffle(GIF);

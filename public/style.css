@@ -187,3 +187,11 @@ input:hover {
   justify-content: center;
   flex-direction: column;
 }
+
+#not-empty-user{
+  display: none;
+}
+
+#scoreinput{
+  display: none;
+}
