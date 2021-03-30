@@ -163,7 +163,7 @@ function handleCardClick(event) {
 
 	localStorage.setItem("score", score);
 	
-	if (gifArray.length== GIF.length / 2 ) {
+	if (gifArray.length== 0 ) {
 		gameContainer.style.display = "none";
 		document.getElementById("scoreinput").value = Number(score);
 		win.play();
@@ -240,15 +240,19 @@ restartBtn.addEventListener("click", function () {
 });
 
 replay.addEventListener("click", function () {
+	
 	if (replayFlag == false) {
+		scoreFinal.style.visibility = "hidden";
 		gameContainer.style.display = "none";
-		startContainer.style.display = "block";
+		startContainer.style.display = "flex";
 
 		userEmail.style.visibility = "hidden";
 		userUser.style.visibility = "hidden";
 		scoreFinal.style.visibility = "hidden";
+		document.getElementById("result").style.visibility = "none";
 		document.getElementById("control").style.visibility = "hidden";
 	} else {
+		
 		replay.src = "icons/back.svg";
 		replayFlag = false;
 		restart();
@@ -299,7 +303,7 @@ function restart() {
 	flag = true;
 	gifArray = [];
 	fetchApi();
-	gameContainer.style.display = "block";
+	gameContainer.style.display = "flex";
 	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
 	youWin.style.display = "none";
 	userEmail.style.display = "none";

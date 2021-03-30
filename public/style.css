@@ -48,6 +48,7 @@ body {
 }
 
 .score {
+  display: block;
   visibility: hidden;
   display: flex;
   align-items: center;
@@ -56,6 +57,7 @@ body {
 
   padding-left: 40px;
   padding-right: 40px;
+  margin-bottom: 0;
 
   color: #eeebdd;
   font-family: 'Courier New', Courier, monospace;
@@ -162,6 +164,7 @@ input:hover {
   justify-content: space-between;
   flex-direction: row;
   margin: 4em;
+  margin-bottom: 3em;
 }
 
 .control img {
@@ -178,7 +181,7 @@ input:hover {
 }
 
 #best-score-parent th{
-
+  margin: auto;
   padding-left: 1em;
 }
 tr{
