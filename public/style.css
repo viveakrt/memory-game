@@ -192,6 +192,6 @@ input:hover {
   display: none;
 }
 
-#scoreinput{
+#scoreinput,#bestScoreInput{
   display: none;
 }

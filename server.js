@@ -38,30 +38,47 @@ app.post('/post', (req, res) => {
         });
 
     const output = `
-    <h3> Hello ${req.body.name} !!</h3>
-    <h2>You Scored ${req.body.score} </h2>
+    <style>      
+    body {
+        background-color: #f6f6f6;
+        width: 100%; 
+    }
+    h1 {
+        color : green;
+    }
+    </style>
+    <h1> Hello ${req.body.name} !!</h1>
+    <h2>You Scored ${req.body.score} in previous game</h2>
+    <h2>Where your Personal best is ${req.body.bestScore} </h2>
     `;
 
     const auth = {
         auth: {
-            api_key: 'pubkey-dbe29dd0ca136e57a6a9c9d7b445afef',
-            domain: 'sandboxc71f9084ef894708bdee6c61c0a41487.mailgun.org'
-        }
+            api_key: process.env.API_KEY,
+            domain: process.env.DOMAIN
+        },
+
     };
     const transporter = nodemailer.createTransport(mailGun(auth));
 
     const mailOptions = {
-        from: 'noreply@memory-game-vivek.com',
-        to: req.body.email,
-        subject: 'Your Score in Match Toon ',
+        from: {
+            name: 'Match Toon',
+            address: 'noreply@memory-game-vivek.com'
+        },
+        to: {
+            name: req.body.name,
+            address: req.body.email
+        },
+        subject: 'Your Score',
         text: `Hi ${req.body.name}, You have a new score: ${req.body.score}`,
         html: output,
     };
 
-    transporter.sendMail(mailOptions, function(err, data) {
-        if(err){
-            console.log('Error While sending Mail');
-        }else{
+    transporter.sendMail(mailOptions, function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
             console.log('MESSAGE SEND!!!');
         }
     });

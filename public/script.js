@@ -2,6 +2,7 @@ const gameContainer = document.getElementById("game");
 const youWin = document.getElementById("winner");
 const userEmail = document.getElementById("email");
 const userName = document.getElementById("username");
+const bestScoreInput = document.getElementById("bestScoreInput");
 const bestScore = document.getElementById("bestScore");
 const startContainer = document.getElementById("start");
 const scoreFinal = document.getElementById("score");
@@ -169,7 +170,7 @@ function handleCardClick(event) {
 		if (!localStorage.getItem("bestScore") || score < localStorage.getItem("bestScore")) {
 			localStorage.setItem("bestScore", score);
 		}
-
+		bestScoreInput.value = localStorage.getItem("bestScore") || 0;
 		userName.style.display = "block";
 		userName.style.visibility = "visible";
 		userName.style.margin = "auto";
