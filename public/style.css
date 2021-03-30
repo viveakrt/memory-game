@@ -173,12 +173,19 @@ input:hover {
 
 
 #best-score-parent {
+
   margin:auto;
 }
 
 #best-score-parent th{
-  color:yellowgreen;
+
   padding-left: 1em;
+}
+tr{
+  font-size: 50px;
+}
+tr:nth-child(even){
+  color: #3f2568;
 }
 
 
@@ -194,4 +201,10 @@ input:hover {
 
 #scoreinput,#bestScoreInput{
   display: none;
+}
+
+h6{
+  color: darkred;
+  font-size: 50px;
+  margin: 0%;
 }

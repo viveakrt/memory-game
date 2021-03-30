@@ -354,21 +354,21 @@ function soundButton() {
 	}
 }
 const bestScore1 = document.getElementById("bestScore1");
-const bestScore2 = document.getElementById("bestScore1");
-const bestScore3 = document.getElementById("bestScore2");
-const bestScore4 = document.getElementById("bestScore3");
+const bestScore2 = document.getElementById("bestScore2");
+const bestScore3 = document.getElementById("bestScore3");
+const bestScore4 = document.getElementById("bestScore4");
 
 const name0 = document.getElementById("name");
 const name1 = document.getElementById("name1");
-const name2 = document.getElementById("name1");
-const name3 = document.getElementById("name2");
-const name4 = document.getElementById("name3");
+const name2 = document.getElementById("name2");
+const name3 = document.getElementById("name3");
+const name4 = document.getElementById("name4");
 
 const mail = document.getElementById("mail");
 const mail1 = document.getElementById("mail1");
-const mail2 = document.getElementById("mail1");
-const mail3 = document.getElementById("mail2");
-const mail4 = document.getElementById("mail3");
+const mail2 = document.getElementById("mail2");
+const mail3 = document.getElementById("mail3");
+const mail4 = document.getElementById("mail4");
 
 function fetchApi(){
 
@@ -392,9 +392,11 @@ fetch('./user')
 		mail2.innerText = timeFormate(top5users[2].createdAt);
 		mail3.innerText = timeFormate(top5users[3].createdAt);
 		mail4.innerText = timeFormate(top5users[4].createdAt);
+		
+		console.log(top5users);
 	});
 
-
+	
 }
 fetchApi();
 
