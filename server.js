@@ -10,16 +10,7 @@ const {
 } = require("./models");
 const mailGun = require('nodemailer-mailgun-transport');
 
-const auth = {
-    auth: {
-        api_key: '',
-        domain:''
-    }
-};
 
-
-
-const transporter = nodemailer.createTransport(mailGun(auth));
 
 const PORT = process.env.PORT;
 app.use(express.urlencoded({
@@ -51,6 +42,29 @@ app.post('/post', (req, res) => {
     <h2>You Scored ${req.body.score} </h2>
     `;
 
+    const auth = {
+        auth: {
+            api_key: 'pubkey-dbe29dd0ca136e57a6a9c9d7b445afef',
+            domain: 'sandboxc71f9084ef894708bdee6c61c0a41487.mailgun.org'
+        }
+    };
+    const transporter = nodemailer.createTransport(mailGun(auth));
+
+    const mailOptions = {
+        from: 'noreply@memory-game-vivek.com',
+        to: req.body.email,
+        subject: 'Your Score in Match Toon ',
+        text: `Hi ${req.body.name}, You have a new score: ${req.body.score}`,
+        html: output,
+    };
+
+    transporter.sendMail(mailOptions, function(err, data) {
+        if(err){
+            console.log('Error While sending Mail');
+        }else{
+            console.log('MESSAGE SEND!!!');
+        }
+    });
 
 });
 
@@ -69,6 +83,7 @@ app.get('/user', (req, res) => {
 
             res.end();
         });
+
 });
 
 db.sequelize
