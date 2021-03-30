@@ -27,7 +27,6 @@ const bgSound = new sound("sounds/bgsound.mp3");
 bestScore.innerText = localStorage.getItem("bestScore") || 0;
 
 
-
 if (!localStorage.getItem("sound")) {
 	localStorage.setItem("sound", "True");
 }
@@ -218,7 +217,6 @@ userName.style.display = "none";
 
 startBtn.addEventListener("click", function () {
 
-
 		startContainer.style.display = "none";
 		gameContainer.style.display = "block";
 		
@@ -299,6 +297,7 @@ function restart() {
 	nextGif = "";
 	flag = true;
 	gifArray = [];
+	fetchApi();
 	gameContainer.style.display = "block";
 	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
 	youWin.style.display = "none";
@@ -352,6 +351,54 @@ function soundButton() {
 	} else {
 		soundBtn.src = "icons/soundCancel.svg";
 	}
+}
+const bestScore1 = document.getElementById("bestScore1");
+const bestScore2 = document.getElementById("bestScore1");
+const bestScore3 = document.getElementById("bestScore2");
+const bestScore4 = document.getElementById("bestScore3");
+
+const name0 = document.getElementById("name");
+const name1 = document.getElementById("name1");
+const name2 = document.getElementById("name1");
+const name3 = document.getElementById("name2");
+const name4 = document.getElementById("name3");
+
+const mail = document.getElementById("mail");
+const mail1 = document.getElementById("mail1");
+const mail2 = document.getElementById("mail1");
+const mail3 = document.getElementById("mail2");
+const mail4 = document.getElementById("mail3");
+
+function fetchApi(){
+
+fetch('./user')
+    .then(res => res.json())
+    .then(top5users => {
+		bestScore.innerText = top5users[0].score;
+		bestScore1.innerText = top5users[1].score;
+		bestScore2.innerText = top5users[2].score;
+		bestScore3.innerText = top5users[3].score;
+		bestScore4.innerText = top5users[4].score;
+
+		name0.innerText = top5users[0].name;
+		name1.innerText = top5users[1].name;
+		name2.innerText = top5users[2].name;
+		name3.innerText = top5users[3].name;
+		name4.innerText = top5users[4].name;
+
+		mail.innerText = timeFormate(top5users[0].createdAt);
+		mail1.innerText = timeFormate(top5users[1].createdAt);
+		mail2.innerText = timeFormate(top5users[2].createdAt);
+		mail3.innerText = timeFormate(top5users[3].createdAt);
+		mail4.innerText = timeFormate(top5users[4].createdAt);
+	});
+
+
+}
+fetchApi();
+
+function timeFormate(str){
+	return (str.slice(0,10)+'/'+str.slice(11,19));
 }
 
 soundButton();

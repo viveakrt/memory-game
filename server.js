@@ -3,9 +3,23 @@ const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 const db = require("./models");
+const nodemailer = require('nodemailer');
 const {
-	userName,scoreData
+    userName,
+    scoreData
 } = require("./models");
+const mailGun = require('nodemailer-mailgun-transport');
+
+const auth = {
+    auth: {
+        api_key: '',
+        domain:''
+    }
+};
+
+
+
+const transporter = nodemailer.createTransport(mailGun(auth));
 
 const PORT = process.env.PORT;
 app.use(express.urlencoded({
@@ -14,27 +28,48 @@ app.use(express.urlencoded({
 
 app.use(express.static('public'));
 
-app.post('/post', (req,res)=>{
+app.post('/post', (req, res) => {
     const userData = {
-        name : req.body.name,
-        email : req.body.email,
-        score : req.body.score,
+        name: req.body.name,
+        email: req.body.email,
+        score: req.body.score,
     };
 
     userName.create(userData)
-    .then((user) => {
-        res
-            .redirect('/');
-    })
-    .catch((err) => {
-        console.log(err);
+        .then(() => {
+            res
+                .redirect('/');
+        })
+        .catch((err) => {
+            console.log(err);
 
-        res.end();
-    });
+            res.end();
+        });
+
+    const output = `
+    <h3> Hello ${req.body.name} !!</h3>
+    <h2>You Scored ${req.body.score} </h2>
+    `;
+
 
 });
 
+app.get('/user', (req, res) => {
+    userName.findAll({
+            limit: 5,
+            order: [
+                ['score', 'ASC']
+            ]
+        }).then((user) => {
+            res
+                .json(user);
+        })
+        .catch((err) => {
+            console.log(err);
 
+            res.end();
+        });
+});
 
 db.sequelize
     .sync()

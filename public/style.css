@@ -108,10 +108,6 @@ body {
   margin: 0;
 }
 
-#bestScore {
-  padding-left: .5em;
-}
-
 
 .start {
   display: flex;
@@ -177,8 +173,12 @@ input:hover {
 
 
 #best-score-parent {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin:auto;
+}
+
+#best-score-parent th{
+  color:yellowgreen;
+  padding-left: 1em;
 }
 
 
