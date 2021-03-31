@@ -247,7 +247,7 @@ replay.addEventListener("click", function () {
 		startContainer.style.display = "flex";
 
 		userEmail.style.visibility = "hidden";
-		userUser.style.visibility = "hidden";
+		userName.style.visibility = "hidden";
 		scoreFinal.style.visibility = "hidden";
 		document.getElementById("result").style.visibility = "none";
 		document.getElementById("control").style.visibility = "hidden";
@@ -307,7 +307,7 @@ function restart() {
 	document.getElementsByClassName("score")[0].innerText = "Score : " + score;
 	youWin.style.display = "none";
 	userEmail.style.display = "none";
-	userUser.style.display = "none";
+	userName.style.display = "none";
 	restartBtn.style.display = "none";
 	
 	let shuffledGif = shuffle(GIF);
