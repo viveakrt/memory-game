@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Memory Game!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="start" id="start">
+    <div class="game-name">
+      <h1 style="color:#FF0000">M<b style="color:#66CC66">A</b><b style="color:#0000ff">T</b><b
+          style="color:#008000">C</b><b style="color:#ffa500">H</b></h1>
+      <h1 style="color:#ee82ee">T<b style="color:#4b0082">O</b><b style="color:#4c2711">O</b><b
+          style="color:#fc3ca5">N</b></h1>
+    </div>
+    <h6>TOP 5 BEST Players</h6>
+    <table>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Score</th>
+        <th>Date/Time</th>
+      </tr>
+      <tr>
+        <th>1st</th>
+        <td id="name"></td>
+        <td id="bestScore"></td>
+        <td id="mail"></td>
+      </tr>
+      <tr>
+        <th>2nd</th>
+        <td id="name1"></td>
+        <td id="bestScore1"></td>
+        <td id="mail1"></td>
+      </tr>
+      <tr>
+        <th>3rd</th>
+        <td id="name2"></td>
+        <td id="bestScore2"></td>
+        <td id="mail2"></td>
+      </tr>
+      <tr>
+        <th>4th</th>
+        <td id="name3"></td>
+        <td id="bestScore3"></td>
+        <td id="mail3"></td>
+      </tr>
+      <tr>
+        <th>5th</th>
+        <td id="name4"></td>
+        <td id="bestScore4"></td>
+        <td id="mail4"></td>
+      </tr>
+    </table>
+    
+    <div id="best-score-parent">
+
+  </div>
+
+
+  <input id="start-btn" type="button" value="S T A R T !">
+  </div>
+
+
+  <div id="game-page">
+    <input id="restart-btn" type="button" value="R E S T A R T">
+    <div id="result">
+      <div id="winner">  
+      </div>
+      <h1 class="score" id="score">Score : 0</h1>
+      <form action="/post" method="post"> 
+
+        <p id="not-empty-user">Enter User Name Please</p>
+        <input id="bestScoreInput" name=bestScore type="number" required>
+        <input id="scoreinput" name=score type="number" required>
+        <input id="username" name="name" type="text" required placeholder="Enter Your User Name" autocomplete="on">
+        <input id="email" name="email" type="email" required placeholder="example@xyz.abc" autocomplete="on">
+        <input id="submit-btn" type="submit" value = "Submit">  
+        
+      </form>
+  </div>
+
+
+    <div id="game">
+
+    </div>
+    <div class="control" id="control">
+      <img id="sound" src="icons/sound.svg">
+      <h1 class="timer" id="timer">Start in : 5sec</h1>
+      <img id="replay" src="icons/back.svg">
+    </div>
+
+  </div>
+
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>
